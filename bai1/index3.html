@@ -1,0 +1,70 @@
+<html>
+    <script src="jquery-3.6.0.min.js"></script>
+
+    <script>
+        function F1(){
+            // //load, get , post
+            // alert('F1');
+            $.ajax(
+                {
+                    url: 'https://62135d56f43692c9c601d020.mockapi.io/vd4',
+                    type: 'GET', //mac dinh GET
+                    dataType: 'json',//mac dinh text
+                    //data:(),
+                    //neu thanh cong, xu ly ket qua tra ve la datareturn
+                    success:function(dataReturn){
+                        console.log(dataReturn);
+                        $.each(dataReturn, function(k,v){
+                            //alert(v.id+'-'+v.name); 
+                            var s =`
+                                <div class="iteam-${v.id}">
+                                    
+                                    <h4>${v.name}</h4>
+                                    <img src="${v.avatar}" height= "50px", weight="50px">
+                                    <button onclick="deleteCor(${v.id})" value="Xoá">Xoá</button>
+                                </div>
+                                
+                            `;  
+                             $('#id1').append(s);
+                        });
+                    }
+
+                }
+            );
+        }
+        function deleteCor(id){
+            $.ajax(
+                {
+                    url: 'https://62135d56f43692c9c601d020.mockapi.io/vd4',
+                    type: 'DELETE', //mac dinh GET
+                    dataType: 'json',//mac dinh text
+                    //data:(),
+                    //neu thanh cong, xu ly ket qua tra ve la datareturn
+                    success:function(dataReturn){
+                        console.log(dataReturn);
+                        $.each(dataReturn, function(k,v){
+                            alert(v.id+'-'+v.name); 
+                            var s =`
+                                <div class="iteam-${v.id}">
+                                    
+                                    <h4>${v.name}</h4>
+                                    <img src="${v.avatar}" height= "50px", weight="50px">
+                                    <button onclick="deleteCor(${v.id})" value="Xoá">Xoá</button>
+                                </div>
+                                
+                            `;  
+                             $('#id1').append(s);
+                        });
+                    }
+
+                }
+            );
+        }
+        
+    </script>
+    <body>
+        <input type='text' id ='kw'><input type='button' onclick='F1()' value="Search">
+        <div id ='id1'>Noi dung 1</div>
+
+    </body>
+</html>
